@@ -89,7 +89,7 @@ Bob, a courageous little rodent, is on a quest of adventure across the land. Eac
     Russel Barro
     ]
 - **Programming:** [
-    Felizardo Arrabis,
+    Felizardo Arrabis Jr.,
     John Christian Bernal
     ]
 
