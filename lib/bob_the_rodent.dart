@@ -6,10 +6,12 @@ import 'package:flame/game.dart';
 
 class BobTheRodent extends FlameGame {
   late final CameraComponent cam;
-  final world = Level();
+  final world = Level(levelName: 'forest-level-01');
 
   @override
-  FutureOr<void> onLoad() {
+  FutureOr<void> onLoad() async {
+    await images.loadAllImages();
+
     cam = CameraComponent.withFixedResolution(
       world: world,
       width: 640,
@@ -18,6 +20,7 @@ class BobTheRodent extends FlameGame {
     cam.viewfinder.anchor = Anchor.topLeft;
 
     addAll([cam, world]);
+
     return super.onLoad();
   }
 }

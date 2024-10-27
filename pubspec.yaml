@@ -64,6 +64,7 @@ flutter:
   assets:
     - assets/images/terrain/
     - assets/tiles/
+    - assets/images/Capybara/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
