@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:bob_the_rodent/levels/level.dart';
 import 'package:flame/components.dart';
+import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 
-class BobTheRodent extends FlameGame {
+class BobTheRodent extends FlameGame with HasKeyboardHandlerComponents {
   late final CameraComponent cam;
   final world = Level(levelName: 'forest-level-01');
 
