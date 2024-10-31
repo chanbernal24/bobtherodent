@@ -1,17 +1,23 @@
 import 'dart:async';
 
 import 'package:bob_the_rodent/levels/level.dart';
+import 'package:bob_the_rodent/player/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 
 class BobTheRodent extends FlameGame with HasKeyboardHandlerComponents {
   late final CameraComponent cam;
-  final world = Level(levelName: 'forest-level-01');
+  Player player = Player(character: 'Capybara');
 
   @override
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
+
+    final world = Level(
+      player: player,
+      levelName: 'forest-level-01',
+    );
 
     cam = CameraComponent.withFixedResolution(
       world: world,
