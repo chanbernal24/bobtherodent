@@ -6,7 +6,7 @@ import 'package:flame/game.dart';
 
 class BobTheRodent extends FlameGame {
   late final CameraComponent cam;
-  final world = Level(levelName: 'forest-level-01');
+  final world = Level(levelName: 'Forest-Level-01');
 
   @override
   FutureOr<void> onLoad() async {
