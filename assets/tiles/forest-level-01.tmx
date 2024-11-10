@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="4" nextobjectid="5">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="6">
  <tileset firstgid="1" source="Bob the Rodent.tsx"/>
- <layer id="1" name="Tile Layer 1" width="40" height="23">
+ <layer id="1" name="terrain" width="40" height="23">
   <data encoding="csv">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -29,6 +29,6 @@
 </data>
  </layer>
  <objectgroup id="3" name="Spawnpoints">
-  <object id="4" name="Player" type="Player" x="-4.9738e-14" y="271.912" width="31.6879" height="31.6879"/>
+  <object id="4" name="Player" type="Player" x="3" y="270.912" width="31.6879" height="31.6879"/>
  </objectgroup>
 </map>
