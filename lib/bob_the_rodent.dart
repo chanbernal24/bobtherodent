@@ -16,7 +16,7 @@ class BobTheRodent extends FlameGame with HasKeyboardHandlerComponents {
 
     final world = Level(
       player: player,
-      levelName: 'forest-level-01',
+      levelName: 'Forest-level-01 pp',
     );
 
     cam = CameraComponent.withFixedResolution(
