@@ -4,7 +4,7 @@
  <tileset firstgid="243" source="../images/Objects/Forest/Vines.tsx"/>
  <tileset firstgid="247" source="../images/Background/Forest.tsx"/>
  <tileset firstgid="8287" source="../images/Objects/Forest/Logs.tsx"/>
- <tileset firstgid="8291" source="MossyRock.tsx"/>
+ <tileset firstgid="8291" source="../images/Objects/Forest/MossyRock.tsx"/>
  <layer id="2" name="BG" width="40" height="23">
   <data encoding="csv">
 3267,3268,3269,3270,3271,3272,3273,3274,3275,3276,3277,3278,3279,3280,3281,3282,3283,3284,3285,3286,3287,3288,3289,3290,3291,3292,3293,3294,3295,3296,3297,3298,3299,3300,3301,3302,3303,3304,3305,3306,

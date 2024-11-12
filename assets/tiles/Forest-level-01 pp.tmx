@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="Bob the Rodent.tsx"/>
  <tileset firstgid="243" source="../images/Background/Forest.tsx"/>
  <tileset firstgid="8283" source="../images/Objects/Forest/MRed.tsx"/>
- <tileset firstgid="8287" source="MossyRock.tsx"/>
+ <tileset firstgid="8287" source="../images/Objects/Forest/MossyRock.tsx"/>
  <tileset firstgid="8291" source="../images/Objects/Forest/Logs.tsx"/>
  <layer id="2" name="BG" width="40" height="23">
   <data encoding="csv">

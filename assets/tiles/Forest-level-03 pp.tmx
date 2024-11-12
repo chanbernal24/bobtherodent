@@ -3,7 +3,7 @@
  <tileset firstgid="1" source="../images/Background/Forest.tsx"/>
  <tileset firstgid="8041" source="Bob the Rodent.tsx"/>
  <tileset firstgid="8283" source="../images/Objects/Forest/Logs.tsx"/>
- <tileset firstgid="8287" source="MossyRock.tsx"/>
+ <tileset firstgid="8287" source="../images/Objects/Forest/MossyRock.tsx"/>
  <layer id="2" name="BG" width="40" height="23">
   <data encoding="csv">
 3021,3022,3023,3024,3025,3026,3027,3028,3029,3030,3031,3032,3033,3034,3035,3036,3037,3038,3039,3040,3041,3042,3043,3044,3045,3046,3047,3048,3049,3050,3051,3052,3053,3054,3055,3056,3057,3058,3059,3060,
