@@ -6,7 +6,8 @@ import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
 
-class BobTheRodent extends FlameGame with HasKeyboardHandlerComponents {
+class BobTheRodent extends FlameGame
+    with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
   late final CameraComponent cam;
   Player player = Player(character: 'Capybara');
 
@@ -16,7 +17,7 @@ class BobTheRodent extends FlameGame with HasKeyboardHandlerComponents {
 
     final world = Level(
       player: player,
-      levelName: 'forest-level-01',
+      levelName: 'Forest-Level-01 pp',
     );
 
     cam = CameraComponent.withFixedResolution(

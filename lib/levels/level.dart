@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bob_the_rodent/collision_block.dart';
+import 'package:bob_the_rodent/components/cheese.dart';
 import 'package:bob_the_rodent/player/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -19,6 +20,13 @@ class Level extends World {
 
     add(level);
 
+    _spawningObjects();
+    _addCollisions();
+
+    return super.onLoad();
+  }
+
+  void _spawningObjects() {
     final spawnPointsLayer = level.tileMap.getLayer<ObjectGroup>('Spawnpoints');
 
 // added a null check to avoid game crash if we dont have spawnPointsLayer
@@ -29,11 +37,20 @@ class Level extends World {
             player.position = Vector2(spawnPoint.x, spawnPoint.y);
             add(player);
             break;
+          case 'Cheese':
+            final cheese = Cheese(
+              cheese: spawnPoint.name,
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(cheese);
           default:
         }
       }
     }
+  }
 
+  void _addCollisions() {
     final collisionsLayer = level.tileMap.getLayer<ObjectGroup>('Collisions');
 
     if (collisionsLayer != null) {
@@ -59,6 +76,5 @@ class Level extends World {
       }
     }
     player.collisionBlocks = collisionBlocks;
-    return super.onLoad();
   }
 }

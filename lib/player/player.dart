@@ -2,7 +2,8 @@ import 'dart:async';
 
 import 'package:bob_the_rodent/bob_the_rodent.dart';
 import 'package:bob_the_rodent/collision_block.dart';
-import 'package:bob_the_rodent/player/player_hitbox.dart';
+import 'package:bob_the_rodent/components/cheese.dart';
+import 'package:bob_the_rodent/player/custom_hitbox.dart';
 import 'package:bob_the_rodent/utils.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
@@ -14,11 +15,11 @@ enum PlayerStates {
   idle,
   running,
   jumping,
-  // falling,
+  falling,
 }
 
 class Player extends SpriteAnimationGroupComponent
-    with HasGameRef<BobTheRodent>, KeyboardHandler {
+    with HasGameRef<BobTheRodent>, KeyboardHandler, CollisionCallbacks {
   Player({
     this.character = 'Capybara',
     position,
@@ -27,27 +28,28 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runningAnimation;
   late final SpriteAnimation jumpingAnimation;
-  // late final SpriteAnimation fallingAnimation;
+  late final SpriteAnimation fallingAnimation;
   final double stepTime = 0.05;
 
-  final double _gravity = 20;
-  final double _jumpForce = 400;
-  final double _terminalVelocity = 400;
+  final double _gravity = 21;
+  final double _jumpForce = 439;
+  final double _terminalVelocity = 600;
   double horizontalMovement = 0;
-  double moveSpeed = 150;
+  double moveSpeed = 200;
   Vector2 velocity = Vector2.zero();
   bool isOnGround = false;
   bool hasJumped = false;
   List<CollisionBlock> collisionBlocks = [];
-  PlayerHitbox hitbox = PlayerHitbox(
-    offsetX: 10,
+  CustomHitbox hitbox = CustomHitbox(
+    offsetX: 4,
     offsetY: 4,
-    width: 14,
+    width: 25,
     height: 28,
   );
 
   @override
   FutureOr<void> onLoad() {
+    priority = 1;
     _loadAllAnimation();
     // debugMode = true;
     add(RectangleHitbox(
@@ -85,17 +87,23 @@ class Player extends SpriteAnimationGroupComponent
     return super.onKeyEvent(event, keysPressed);
   }
 
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Cheese) other.collidedWithPlayer();
+    super.onCollision(intersectionPoints, other);
+  }
+
   void _loadAllAnimation() {
-    runningAnimation = _spriteAnimation('Walk', 5);
-    idleAnimation = _spriteAnimation('Idle', 5);
-    jumpingAnimation = _spriteAnimation('Single_Jump', 1);
-    // fallingAnimation = _spriteAnimation('Idle', 3);
+    runningAnimation = _spriteAnimation('Walk-Updated', 5);
+    idleAnimation = _spriteAnimation('Idle-Updated', 5);
+    jumpingAnimation = _spriteAnimation('Jump_Double_Fall-Updated', 2);
+    fallingAnimation = _spriteAnimation('Faint-Updated', 3);
 
     animations = {
       PlayerStates.idle: idleAnimation,
       PlayerStates.running: runningAnimation,
       PlayerStates.jumping: jumpingAnimation,
-      // PlayerStates.falling: fallingAnimation,
+      PlayerStates.falling: fallingAnimation,
     };
 
     current = PlayerStates.idle;
@@ -136,9 +144,9 @@ class Player extends SpriteAnimationGroupComponent
     }
 
     // for falling animation
-    // if (velocity.y > 0) {
-    //   playerState = PlayerStates.falling;
-    // }
+    if (velocity.y > 0) {
+      playerState = PlayerStates.falling;
+    }
 
     current = playerState;
   }
@@ -146,7 +154,9 @@ class Player extends SpriteAnimationGroupComponent
   void _updatePlayerMovement(double dt) {
     if (hasJumped && isOnGround) _playerJump(dt);
 
-    // if (velocity.y > _gravity) isOnGround = false;  allows jump while falling (optional)
+    // disable jump while falling
+
+    if (velocity.y > _gravity) isOnGround = false;
 
     velocity.x = horizontalMovement * moveSpeed;
     position.x += velocity.x * dt;
