@@ -1,10 +1,13 @@
 import 'dart:async';
 
 import 'package:bob_the_rodent/bob_the_rodent.dart';
-import 'package:bob_the_rodent/collision_block.dart';
+import 'package:bob_the_rodent/components/checkpoint.dart';
+import 'package:bob_the_rodent/components/collision_block.dart';
 import 'package:bob_the_rodent/components/cheese.dart';
-import 'package:bob_the_rodent/player/custom_hitbox.dart';
-import 'package:bob_the_rodent/utils.dart';
+import 'package:bob_the_rodent/components/custom_hitbox.dart';
+import 'package:bob_the_rodent/components/hole.dart';
+import 'package:bob_the_rodent/components/utils.dart';
+import 'package:bob_the_rodent/levels/level.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 // import 'package:flutter/src/services/hardware_keyboard.dart';
@@ -25,20 +28,23 @@ class Player extends SpriteAnimationGroupComponent
     position,
   }) : super(position: position);
   String character;
+
   late final SpriteAnimation idleAnimation;
   late final SpriteAnimation runningAnimation;
   late final SpriteAnimation jumpingAnimation;
   late final SpriteAnimation fallingAnimation;
   final double stepTime = 0.05;
-
   final double _gravity = 21;
   final double _jumpForce = 439;
   final double _terminalVelocity = 600;
   double horizontalMovement = 0;
   double moveSpeed = 200;
+  Vector2 startingPosition = Vector2.zero();
   Vector2 velocity = Vector2.zero();
   bool isOnGround = false;
   bool hasJumped = false;
+  bool isCheckpointReached = false;
+  // bool goalReached = false;
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(
     offsetX: 4,
@@ -51,6 +57,9 @@ class Player extends SpriteAnimationGroupComponent
   FutureOr<void> onLoad() {
     priority = 1;
     _loadAllAnimation();
+
+    startingPosition = Vector2(position.x, position.y);
+
     // debugMode = true;
     add(RectangleHitbox(
         position: Vector2(hitbox.offsetX, hitbox.offsetY),
@@ -60,11 +69,13 @@ class Player extends SpriteAnimationGroupComponent
 
   @override
   void update(double dt) {
-    _updatePlayerState();
-    _updatePlayerMovement(dt);
-    _checkHorizontalCollisions();
-    _applyGravity(dt);
-    _checkVerticalCollisions();
+    if (!isCheckpointReached) {
+      _updatePlayerState();
+      _updatePlayerMovement(dt);
+      _checkHorizontalCollisions();
+      _applyGravity(dt);
+      _checkVerticalCollisions();
+    }
     super.update(dt);
   }
 
@@ -91,6 +102,8 @@ class Player extends SpriteAnimationGroupComponent
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     if (other is Cheese) other.collidedWithPlayer();
     super.onCollision(intersectionPoints, other);
+    if (other is Checkpoint && !isCheckpointReached) _reachedCheckpoint();
+    // if (other is Hole) _respawn();
   }
 
   void _loadAllAnimation() {
@@ -224,5 +237,47 @@ class Player extends SpriteAnimationGroupComponent
         }
       }
     }
+  }
+
+  void resetPlayerState(Vector2 newPosition) {
+    // Reset position to the new starting position
+    position = newPosition;
+
+    // Reset velocity to stop movement
+    velocity = Vector2.zero();
+    horizontalMovement = 0;
+
+    // Reset facing direction (default to facing right)
+    if (scale.x < 0) {
+      flipHorizontallyAroundCenter();
+    }
+
+    // Reset other states if necessary
+    isOnGround = false;
+    hasJumped = false;
+    isCheckpointReached = false;
+    // goalReached = false;
+
+    // Reset animation state to idle
+    current = PlayerStates.idle;
+  }
+
+  // void _respawn() {
+  //   position = startingPosition;
+  // }
+
+  void _reachedCheckpoint() {
+    isCheckpointReached = true;
+    // goalReached = true;
+
+    const reachedCheckpointDuration = Duration(milliseconds: 200);
+    Future.delayed(reachedCheckpointDuration, () {
+      // position = startingPosition;
+      resetPlayerState(startingPosition);
+      isCheckpointReached = false;
+      // goalReached = false;
+      position = Vector2.all(-640);
+      game.loadNextLevel();
+    });
   }
 }

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="7" nextobjectid="100">
+<map version="1.10" tiledversion="1.11.0" orientation="orthogonal" renderorder="right-down" width="40" height="23" tilewidth="16" tileheight="16" infinite="0" nextlayerid="9" nextobjectid="106">
  <tileset firstgid="1" source="Bob the Rodent.tsx"/>
  <tileset firstgid="243" source="../images/Background/Forest.tsx"/>
  <tileset firstgid="8283" source="../images/Objects/Forest/MRed.tsx"/>
  <tileset firstgid="8287" source="../images/Objects/Forest/MossyRock.tsx"/>
  <tileset firstgid="8291" source="../images/Objects/Forest/Logs.tsx"/>
+ <tileset firstgid="8295" source="../images/Portal/Portal.tsx"/>
  <layer id="2" name="BG" width="40" height="23">
   <data encoding="csv">
 3263,3264,3265,3266,3267,3268,3269,3270,3271,3272,3273,3274,3275,3276,3277,3278,3279,3280,3281,3282,3283,3284,3285,3286,3287,3288,3289,3290,3291,3292,3293,3294,3295,3296,3297,3298,3299,3300,3301,3302,
@@ -86,19 +87,6 @@
 160,117,118,116,117,118,119,116,117,118,119,116,117,118,119,116,117,118,119,116,117,118,119,116,117,118,119,116,117,118,119,116,117,118,119,116,117,118,119,185
 </data>
  </layer>
- <objectgroup id="5" name="Spawnpoints">
-  <object id="1" name="Player" type="Player" x="64" y="304" width="32" height="32"/>
-  <object id="70" name="Cheese" type="Cheese" x="256" y="208" width="48" height="48"/>
-  <object id="82" name="Cheese" type="Cheese" x="336" y="208" width="48" height="48"/>
-  <object id="83" name="Cheese" type="Cheese" x="432" y="128" width="48" height="48"/>
-  <object id="84" name="Cheese" type="Cheese" x="512" y="128" width="48" height="48"/>
-  <object id="85" name="Cheese" type="Cheese" x="576" y="80" width="48" height="48"/>
-  <object id="86" name="Cheese" type="Cheese" x="464" y="16" width="48" height="48"/>
-  <object id="88" name="Cheese" type="Cheese" x="400" y="32" width="48" height="48"/>
-  <object id="89" name="Cheese" type="Cheese" x="272" y="0" width="48" height="48"/>
-  <object id="90" name="Cheese" type="Cheese" x="176" y="0" width="48" height="48"/>
-  <object id="91" name="Cheese" type="Cheese" x="112" y="0" width="48" height="48"/>
- </objectgroup>
  <objectgroup id="6" name="Collisions">
   <object id="4" x="0" y="16" width="16" height="352"/>
   <object id="5" x="16" y="336" width="624" height="32"/>
@@ -119,5 +107,19 @@
   <object id="63" x="400" y="96" width="64" height="48"/>
   <object id="66" x="0" y="0" width="640" height="16"/>
   <object id="95" x="592" y="144" width="32" height="32"/>
+ </objectgroup>
+ <objectgroup id="5" name="Spawnpoints">
+  <object id="1" name="Player" type="Player" x="64" y="256" width="32" height="32"/>
+  <object id="70" name="Cheese" type="Cheese" x="256" y="208" width="64" height="64"/>
+  <object id="82" name="Cheese" type="Cheese" x="320" y="208" width="64" height="64"/>
+  <object id="83" name="Cheese" type="Cheese" x="416" y="128" width="64" height="64"/>
+  <object id="84" name="Cheese" type="Cheese" x="496" y="128" width="64" height="64"/>
+  <object id="85" name="Cheese" type="Cheese" x="560" y="80" width="64" height="64"/>
+  <object id="86" name="Cheese" type="Cheese" x="464" y="16" width="64" height="64"/>
+  <object id="88" name="Cheese" type="Cheese" x="400" y="32" width="64" height="64"/>
+  <object id="89" name="Cheese" type="Cheese" x="272" y="0" width="64" height="64"/>
+  <object id="90" name="Cheese" type="Cheese" x="160" y="0" width="64" height="64"/>
+  <object id="91" name="Cheese" type="Cheese" x="112" y="0" width="64" height="64"/>
+  <object id="102" name="Checkpoint" type="Checkpoint" x="32" y="112" width="32" height="32"/>
  </objectgroup>
 </map>

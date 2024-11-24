@@ -1,11 +1,12 @@
 import 'dart:async';
-
-import 'package:bob_the_rodent/collision_block.dart';
+import 'package:bob_the_rodent/components/checkpoint.dart';
+import 'package:bob_the_rodent/components/collision_block.dart';
 import 'package:bob_the_rodent/components/cheese.dart';
+import 'package:bob_the_rodent/components/hole.dart';
 import 'package:bob_the_rodent/player/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 
 class Level extends World {
   late TiledComponent level;
@@ -20,8 +21,8 @@ class Level extends World {
 
     add(level);
 
-    _spawningObjects();
     _addCollisions();
+    _spawningObjects();
 
     return super.onLoad();
   }
@@ -34,7 +35,9 @@ class Level extends World {
       for (final spawnPoint in spawnPointsLayer.objects) {
         switch (spawnPoint.class_) {
           case 'Player':
+            // Update player's position and startingPosition
             player.position = Vector2(spawnPoint.x, spawnPoint.y);
+            player.startingPosition = player.position.clone();
             add(player);
             break;
           case 'Cheese':
@@ -44,6 +47,21 @@ class Level extends World {
               size: Vector2(spawnPoint.width, spawnPoint.height),
             );
             add(cheese);
+            break;
+          case 'Checkpoint':
+            final checkpoint = Checkpoint(
+              position: Vector2(spawnPoint.x, spawnPoint.y),
+              size: Vector2(spawnPoint.width, spawnPoint.height),
+            );
+            add(checkpoint);
+            break;
+          // case 'Hole':
+          //   final hole = Hole(
+          //     position: Vector2(spawnPoint.x, spawnPoint.y),
+          //     size: Vector2(spawnPoint.width, spawnPoint.height),
+          //   );
+          //   add(hole);
+          // break;
           default:
         }
       }

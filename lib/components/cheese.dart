@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:bob_the_rodent/bob_the_rodent.dart';
-import 'package:bob_the_rodent/player/custom_hitbox.dart';
+import 'package:bob_the_rodent/components/custom_hitbox.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
@@ -9,23 +9,25 @@ class Cheese extends SpriteAnimationComponent
     with HasGameRef<BobTheRodent>, CollisionCallbacks {
   final String cheese;
   Cheese({
-    this.cheese = 'Cheese',
+    this.cheese = 'Cheese_Idle',
     position,
     size,
   }) : super(
           position: position,
           size: size,
         );
-  final double stepTime = 0.05;
+
+  bool _collected = false;
+  final double stepTime = 0.2;
   final hitbox = CustomHitbox(
-    offsetX: 14,
-    offsetY: 36,
-    width: 20,
-    height: 13,
+    offsetX: 19,
+    offsetY: 24,
+    width: 26,
+    height: 22,
   );
 
   @override
-  FutureOr<void> onLoad() {
+  FutureOr<void> onLoad() async {
     // debugMode = true;
 
     add(
@@ -36,9 +38,9 @@ class Cheese extends SpriteAnimationComponent
       ),
     );
     animation = SpriteAnimation.fromFrameData(
-        game.images.fromCache('Collectibles/$cheese.png'),
+        game.images.fromCache('Collectibles/Cheese_Idle.png'),
         SpriteAnimationData.sequenced(
-          amount: 1,
+          amount: 5,
           stepTime: stepTime,
           textureSize: Vector2.all(64),
         ));
@@ -46,6 +48,20 @@ class Cheese extends SpriteAnimationComponent
   }
 
   void collidedWithPlayer() {
-    removeFromParent();
+    if (!_collected) {
+      animation = SpriteAnimation.fromFrameData(
+          game.images.fromCache('Collectibles/Cheese_Claim.png'),
+          SpriteAnimationData.sequenced(
+            amount: 2,
+            stepTime: stepTime,
+            textureSize: Vector2.all(64),
+            loop: false,
+          ));
+      _collected = true;
+    }
+    Future.delayed(
+      const Duration(milliseconds: 280),
+      () => removeFromParent(),
+    );
   }
 }
