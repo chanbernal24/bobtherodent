@@ -10,7 +10,7 @@ class SoundManager {
   SoundManager._internal();
 
   bool soundsEnabled = true;
-  double volume = 0.1;
+  double volume = 0.04;
 
   Future<void> preloadSounds(List<String> soundFiles) async {
     await FlameAudio.audioCache.loadAll(soundFiles);

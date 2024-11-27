@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:bob_the_rodent/bob_the_rodent.dart';
 import 'package:bob_the_rodent/components/custom_hitbox.dart';
+import 'package:bob_the_rodent/components/sound_manager.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flame_audio/flame_audio.dart';
@@ -51,9 +52,7 @@ class Cheese extends SpriteAnimationComponent
   void collidedWithPlayer() {
     if (!_collected) {
       _collected = true;
-      if (game.playSounds) {
-        FlameAudio.play('cheese_pickup.wav', volume: game.soundVolume);
-      }
+      if (game.playSounds) SoundManager().playSound('cheese_pickup.wav');
       animation = SpriteAnimation.fromFrameData(
         game.images.fromCache('Collectibles/Cheese_Claim.png'),
         SpriteAnimationData.sequenced(

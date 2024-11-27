@@ -12,7 +12,6 @@ class BobTheRodent extends FlameGame
   late CameraComponent cam;
   Player player = Player(character: 'Capybara');
   bool playSounds = true;
-  double soundVolume = 0.1;
   List<String> levelNames = [
     'Forest-level-01 pp',
     'Forest-level-02 pp',
