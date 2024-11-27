@@ -40,6 +40,7 @@ class Level extends World {
             //make the player look at right evertime it spawns
             player.scale.x = 1;
             add(player);
+
             break;
           case 'Cheese':
             final cheese = Cheese(

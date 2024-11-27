@@ -1,11 +1,13 @@
 import 'dart:async';
 
+// import 'package:bob_the_rodent/components/sound_manager.dart';
 import 'package:bob_the_rodent/components/sound_manager.dart';
 import 'package:bob_the_rodent/levels/level.dart';
 import 'package:bob_the_rodent/components/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class BobTheRodent extends FlameGame
     with HasKeyboardHandlerComponents, DragCallbacks, HasCollisionDetection {
@@ -23,8 +25,8 @@ class BobTheRodent extends FlameGame
   FutureOr<void> onLoad() async {
     await images.loadAllImages();
 
-    // Preload sound effects
-    await SoundManager().preloadSounds(['jump.wav', 'teleporting.wav']);
+    await SoundManager()
+        .preloadSounds(['jump.wav', 'cheese_pickup.wav', 'teleporting.wav']);
 
     _loadlevel();
 
@@ -38,6 +40,7 @@ class BobTheRodent extends FlameGame
       _loadlevel();
     } else {
       // this runs when there is no more levels
+
       // currentLevelIndex = 0;
       // removeWhere((component) => component is Level);
       // _loadlevel();

@@ -6,6 +6,7 @@ import 'package:bob_the_rodent/components/collision_block.dart';
 import 'package:bob_the_rodent/components/cheese.dart';
 import 'package:bob_the_rodent/components/custom_hitbox.dart';
 import 'package:bob_the_rodent/components/sound_manager.dart';
+// import 'package:bob_the_rodent/components/sound_manager.dart';
 // import 'package:bob_the_rodent/components/hole.dart';
 import 'package:bob_the_rodent/components/utils.dart';
 // import 'package:bob_the_rodent/levels/level.dart';
@@ -35,12 +36,15 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation runningAnimation;
   late final SpriteAnimation jumpingAnimation;
   late final SpriteAnimation fallingAnimation;
+
   final double stepTime = 0.05;
   final double _gravity = 21;
   final double _jumpForce = 439;
   final double _terminalVelocity = 439;
   double horizontalMovement = 0;
   double moveSpeed = 200;
+  double soundVolume = 0.04;
+
   Vector2 velocity = Vector2.zero();
   bool isOnGround = false;
   bool hasJumped = false;
@@ -177,7 +181,6 @@ class Player extends SpriteAnimationGroupComponent
 
   void _playerJump(double dt) {
     if (game.playSounds) SoundManager().playSound('jump.wav');
-
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
     isOnGround = false;
@@ -242,10 +245,8 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _reachedCheckpoint() {
-    if (game.playSounds) {
-      SoundManager().playSound('teleporting.wav');
-    }
     isCheckpointReached = true;
+    if (game.playSounds) SoundManager().playSound('teleporting.wav');
 
     const reachedCheckpointDuration = Duration(milliseconds: 200);
     Future.delayed(reachedCheckpointDuration, () {
