@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   flame: ^1.15.0
   flame_tiled: ^1.18.4
+  flame_audio: ^2.10.1
 
 dev_dependencies:
   flutter_test:
@@ -62,6 +63,9 @@ flutter:
   assets:
     - assets/images/terrain/
     - assets/tiles/
+    - assets/audio/cheese_pickup.wav
+    - assets/audio/teleporting.wav
+    - assets/audio/jump.wav
     - assets/images/Capybara/
     - assets/images/Objects/Swamp/
     - assets/images/Objects/Forest/

@@ -4,6 +4,7 @@ import 'package:bob_the_rodent/bob_the_rodent.dart';
 import 'package:bob_the_rodent/components/custom_hitbox.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flame_audio/flame_audio.dart';
 
 class Cheese extends SpriteAnimationComponent
     with HasGameRef<BobTheRodent>, CollisionCallbacks {
@@ -49,15 +50,19 @@ class Cheese extends SpriteAnimationComponent
 
   void collidedWithPlayer() {
     if (!_collected) {
-      animation = SpriteAnimation.fromFrameData(
-          game.images.fromCache('Collectibles/Cheese_Claim.png'),
-          SpriteAnimationData.sequenced(
-            amount: 2,
-            stepTime: stepTime,
-            textureSize: Vector2.all(64),
-            loop: false,
-          ));
       _collected = true;
+      if (game.playSounds) {
+        FlameAudio.play('cheese_pickup.wav', volume: game.soundVolume);
+      }
+      animation = SpriteAnimation.fromFrameData(
+        game.images.fromCache('Collectibles/Cheese_Claim.png'),
+        SpriteAnimationData.sequenced(
+          amount: 2,
+          stepTime: stepTime,
+          textureSize: Vector2.all(64),
+          loop: false,
+        ),
+      );
     }
     Future.delayed(
       const Duration(milliseconds: 280),

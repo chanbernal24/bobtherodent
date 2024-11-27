@@ -3,7 +3,7 @@ import 'package:bob_the_rodent/components/checkpoint.dart';
 import 'package:bob_the_rodent/components/collision_block.dart';
 import 'package:bob_the_rodent/components/cheese.dart';
 import 'package:bob_the_rodent/components/hole.dart';
-import 'package:bob_the_rodent/player/player.dart';
+import 'package:bob_the_rodent/components/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
 // import 'package:flutter/foundation.dart';
@@ -37,7 +37,8 @@ class Level extends World {
           case 'Player':
             // Update player's position and startingPosition
             player.position = Vector2(spawnPoint.x, spawnPoint.y);
-            player.startingPosition = player.position.clone();
+            //make the player look at right evertime it spawns
+            player.scale.x = 1;
             add(player);
             break;
           case 'Cheese':

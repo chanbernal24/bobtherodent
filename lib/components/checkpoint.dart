@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:bob_the_rodent/bob_the_rodent.dart';
 import 'package:bob_the_rodent/components/custom_hitbox.dart';
-import 'package:bob_the_rodent/player/player.dart';
+import 'package:bob_the_rodent/components/player.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 
@@ -16,12 +16,10 @@ class Checkpoint extends SpriteAnimationComponent
           size: size,
         );
 
-  bool isCheckpointReached = false;
-
   final hitbox = CustomHitbox(
-    offsetX: 5,
+    offsetX: 12,
     offsetY: 26,
-    width: 22,
+    width: 8,
     height: 5,
   );
 
@@ -47,13 +45,13 @@ class Checkpoint extends SpriteAnimationComponent
   }
 
   @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    if (other is Player && !isCheckpointReached) _reachedCheckpoint();
-    super.onCollision(intersectionPoints, other);
+  void onCollisionStart(
+      Set<Vector2> intersectionPoints, PositionComponent other) {
+    if (other is Player) _reachedCheckpoint();
+    super.onCollisionStart(intersectionPoints, other);
   }
 
-  void _reachedCheckpoint() {
-    isCheckpointReached = true;
+  void _reachedCheckpoint() async {
     animation = SpriteAnimation.fromFrameData(
       game.images.fromCache('Portal/Portal.png'),
       SpriteAnimationData.sequenced(
@@ -63,5 +61,7 @@ class Checkpoint extends SpriteAnimationComponent
         // loop: false,
       ),
     );
+
+    await animationTicker?.completed;
   }
 }
