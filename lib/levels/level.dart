@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:bob_the_rodent/components/checkpoint.dart';
 import 'package:bob_the_rodent/components/collision_block.dart';
 import 'package:bob_the_rodent/components/cheese.dart';
-import 'package:bob_the_rodent/components/hole.dart';
 import 'package:bob_the_rodent/components/player.dart';
 import 'package:flame/components.dart';
 import 'package:flame_tiled/flame_tiled.dart';
@@ -40,7 +39,6 @@ class Level extends World {
             //make the player look at right evertime it spawns
             player.scale.x = 1;
             add(player);
-
             break;
           case 'Cheese':
             final cheese = Cheese(
@@ -57,13 +55,6 @@ class Level extends World {
             );
             add(checkpoint);
             break;
-          // case 'Hole':
-          //   final hole = Hole(
-          //     position: Vector2(spawnPoint.x, spawnPoint.y),
-          //     size: Vector2(spawnPoint.width, spawnPoint.height),
-          //   );
-          //   add(hole);
-          // break;
           default:
         }
       }
@@ -76,7 +67,7 @@ class Level extends World {
     if (collisionsLayer != null) {
       for (final collision in collisionsLayer.objects) {
         switch (collision.class_) {
-          case 'Platform':
+          case 'Collisions':
             final platform = CollisionBlock(
               position: Vector2(collision.x, collision.y),
               size: Vector2(collision.width, collision.height),

@@ -5,17 +5,10 @@ import 'package:bob_the_rodent/components/checkpoint.dart';
 import 'package:bob_the_rodent/components/collision_block.dart';
 import 'package:bob_the_rodent/components/cheese.dart';
 import 'package:bob_the_rodent/components/custom_hitbox.dart';
-import 'package:bob_the_rodent/components/sound_manager.dart';
-// import 'package:bob_the_rodent/components/sound_manager.dart';
-// import 'package:bob_the_rodent/components/hole.dart';
 import 'package:bob_the_rodent/components/utils.dart';
-// import 'package:bob_the_rodent/levels/level.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:flame_audio/flame_audio.dart';
-// import 'package:flutter/src/services/hardware_keyboard.dart';
 import 'package:flutter/services.dart';
-// import 'package:flutter/src/services/keyboard_key.g.dart';
 
 enum PlayerStates {
   idle,
@@ -38,11 +31,11 @@ class Player extends SpriteAnimationGroupComponent
   late final SpriteAnimation fallingAnimation;
 
   final double stepTime = 0.05;
-  final double _gravity = 21;
-  final double _jumpForce = 439;
-  final double _terminalVelocity = 439;
+  final double _gravity = 15;
+  final double _jumpForce = 379;
+  final double _terminalVelocity = 349;
   double horizontalMovement = 0;
-  double moveSpeed = 200;
+  double moveSpeed = 169;
   double soundVolume = 0.04;
 
   Vector2 velocity = Vector2.zero();
@@ -52,9 +45,9 @@ class Player extends SpriteAnimationGroupComponent
   List<CollisionBlock> collisionBlocks = [];
   CustomHitbox hitbox = CustomHitbox(
     offsetX: 4,
-    offsetY: 4,
+    offsetY: 8,
     width: 25,
-    height: 28,
+    height: 24,
   );
 
   @override
@@ -180,7 +173,9 @@ class Player extends SpriteAnimationGroupComponent
   }
 
   void _playerJump(double dt) {
-    if (game.playSounds) SoundManager().playSound('jump.wav');
+    // for sfx when jumping but it's bugged due to windows and flutter interaction
+    // if (game.playSounds) SoundManager().playSound('jump.wav');
+
     velocity.y = -_jumpForce;
     position.y += velocity.y * dt;
     isOnGround = false;
@@ -246,9 +241,11 @@ class Player extends SpriteAnimationGroupComponent
 
   void _reachedCheckpoint() {
     isCheckpointReached = true;
-    if (game.playSounds) SoundManager().playSound('teleporting.wav');
 
-    const reachedCheckpointDuration = Duration(milliseconds: 200);
+    // sfx when checkpoint is reached but bugged due to windows and flutter interaction
+    // if (game.playSounds) SoundManager().playSound('teleporting.wav');
+
+    const reachedCheckpointDuration = Duration(milliseconds: 1000);
     Future.delayed(reachedCheckpointDuration, () {
       isCheckpointReached = false;
       position = Vector2.all(-640);

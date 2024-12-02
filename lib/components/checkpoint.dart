@@ -17,10 +17,10 @@ class Checkpoint extends SpriteAnimationComponent
         );
 
   final hitbox = CustomHitbox(
-    offsetX: 12,
-    offsetY: 26,
-    width: 8,
-    height: 5,
+    offsetX: 20,
+    offsetY: 33,
+    width: 5,
+    height: 14,
   );
 
   @override
