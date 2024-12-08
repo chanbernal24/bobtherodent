@@ -1,4 +1,4 @@
-import 'package:bob_the_rodent/bob_the_rodent.dart';
+import 'package:bob_the_rodent/game/bob_the_rodent.dart';
 import 'package:flame/components.dart';
 
 class Hole extends SpriteAnimationComponent with HasGameRef<BobTheRodent> {

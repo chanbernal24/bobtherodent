@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:bob_the_rodent/bob_the_rodent.dart';
+import 'package:bob_the_rodent/game/bob_the_rodent.dart';
 import 'package:bob_the_rodent/components/custom_hitbox.dart';
 import 'package:bob_the_rodent/components/player.dart';
 import 'package:flame/collisions.dart';
