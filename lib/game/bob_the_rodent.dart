@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:bob_the_rodent/levels/level.dart';
 import 'package:bob_the_rodent/components/player.dart';
+import 'package:bob_the_rodent/widgets/game_over.dart';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flame/game.dart';
@@ -42,9 +43,8 @@ class BobTheRodent extends FlameGame
       _loadlevel();
     } else {
       // this runs when there is no more levels
-
-      // currentLevelIndex = 0;
-      // _loadlevel();
+      pauseEngine();
+      overlays.add(GameOver.ID);
     }
   }
 

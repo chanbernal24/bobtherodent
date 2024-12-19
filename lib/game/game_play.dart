@@ -1,4 +1,5 @@
 import 'package:bob_the_rodent/game/bob_the_rodent.dart';
+import 'package:bob_the_rodent/widgets/game_over.dart';
 import 'package:bob_the_rodent/widgets/pause_button.dart';
 import 'package:bob_the_rodent/widgets/pause_menu.dart';
 import 'package:flame/game.dart';
@@ -24,6 +25,10 @@ class GamePlay extends StatelessWidget {
                 ),
             PauseMenu.ID: (BuildContext context, BobTheRodent gameRef) =>
                 PauseMenu(
+                  gameRef: gameRef,
+                ),
+            GameOver.ID: (BuildContext context, BobTheRodent gameRef) =>
+                GameOver(
                   gameRef: gameRef,
                 ),
           }),
