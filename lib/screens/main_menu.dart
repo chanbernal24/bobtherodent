@@ -31,11 +31,16 @@ class MainMenu extends StatelessWidget {
             color: Colors.black.withOpacity(0.4),
             child: Padding(
               padding:
-                  const EdgeInsets.symmetric(horizontal: 100, vertical: 40),
+                  const EdgeInsets.symmetric(horizontal: 150, vertical: 35),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 mainAxisSize: MainAxisSize.min,
                 children: [
+                  const Image(
+                    width: 110,
+                    height: 110,
+                    image: AssetImage('assets/images/Capybara/capy-logo.png'),
+                  ),
                   const Text(
                     'Bob the Rodent',
                     style: TextStyle(
@@ -52,6 +57,9 @@ class MainMenu extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromRGBO(205, 224, 200, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                       ),
                       child: const Text(
                         'Play',
@@ -78,6 +86,9 @@ class MainMenu extends StatelessWidget {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Color.fromRGBO(205, 224, 200, 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
                       ),
                       child: const Text(
                         'Quit Game',
